@@ -6,9 +6,10 @@ import numpy as np
 from NIDAQ_plt3 import AI as NI
 import time
 from PyQt5 import QtWidgets, QtCore
-from gui_ui import Ui_MainWindow
+from test import Ui_MainWindow
 from matplotlibwidget import MatplotlibWidget
-        
+
+# class of GUI window        
 class MainWindow(QtWidgets.QMainWindow):    
     def __init__(self, parent=None):
         global ui

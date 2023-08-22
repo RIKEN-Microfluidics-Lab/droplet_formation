@@ -8,9 +8,10 @@ Created on Tue Mar 12 16:37:45 2019
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QSizePolicy
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as Canvas
-from matplotlib.figure import Figure
+from matplotlib.figure import Figure 
 from matplotlib import rcParams
 
+# Setting the layout of figure
 rcParams['font.size'] = 9
 
 

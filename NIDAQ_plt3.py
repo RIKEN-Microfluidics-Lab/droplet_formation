@@ -3,24 +3,14 @@
 Created on Sat Mar  2 22:20:46 2019
 
 @author: shintaku
+
+Update: 2020-11-05, kaneko
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 21 17:01:17 2018
-
-@author: lab
-"""
-
-# In[]
-#import time, datetime, os#, nidaqmx#, itertools
-import time, datetime, os, serial#import matplotlib.pyplot as plt
-#from matplotlib import animation
-#import numpy as np
+import time, datetime, os, serial
 
 ser = serial.Serial('COM5', 9600, timeout=1)
 
-# In[]
 class AI():  
     def DefFile(): # Making Folder for saving outputs
         global FolderName1
@@ -39,41 +29,53 @@ class AI():
         
 
     def ArduinoAI(x,y,c):
-#        import serial
-        #ser = serial.Serial('COM3',9600,timeout=5)
         #ser.flushInput()
         #ser.open()
-        c = []
-        #配列cをclear
-        ser.write(b'AI1:2')
-        #time.sleep(0.01)
-        ser_bytes = ser.readline().decode("utf-8")
-        #decoded_bytes = ser_bytes[0:len(ser_bytes)].decode("utf-8")
-        #decoded_bytes = list(map(int,str.split(decoded_bytes.strip("\r\n"),",")))
-        decoded_bytes = ser_bytes.strip() # hiroyuki
         
+        # Initialize c[]
+        c = []
+
+        # Read analog input of AN4-5
+        ser.write(b'AI5:6')
+        
+        # Arduino will return the read value of analog input
+        # format: AN1, AN2, ...
+        ser_bytes = ser.readline().decode("utf-8")
+        decoded_bytes = ser_bytes.strip()
+        
+        # x and y are sequential data from the begining
         x.append(time.time())
         y.extend(decoded_bytes.split(","))
 
+        # c is a temporal data
         c.append(time.time())
         c.extend(decoded_bytes.split(","))
 
         if len(c) == 2:
             c[1] = 0
-            c.extend([0,0,0])
+            c.extend([0,0])
             
-                       
-        for i in range(5): # range(X):Xはチャンネル数
+        for i in range(len(c)): # range(X):Xはチャンネル数
             c[i] = float(c[i]) # listをfloat形式に変換
  
         return(x,y,c)
-        
-    def ArduinoDO(flag):
+    
+    # Control Valve_1    
+    def ArduinoDO_1(flag):
         #ser.flushInput()
         if flag==True:   
             ser.write(b'DO1H')
         else:
             ser.write(b'DO1L')
+        #ser.close()
+
+    # Control Valve_2           
+    def ArduinoDO_2(flag):
+        #ser.flushInput()
+        if flag==True:   
+            ser.write(b'DO2H')
+        else:
+            ser.write(b'DO2L')
         #ser.close()
         
     def ArduinoDP(ch,pulsewidth,duty,number):
