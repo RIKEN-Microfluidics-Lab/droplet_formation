@@ -124,6 +124,32 @@
      <string>kPa</string>
     </property>
    </widget>
+   <widget class="QSlider" name="horizontalSlider">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>430</y>
+      <width>231</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider_2">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>430</y>
+      <width>231</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -163,7 +189,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>101</x>
-     <y>403</y>
+     <y>501</y>
     </hint>
     <hint type="destinationlabel">
      <x>313</x>
@@ -179,11 +205,43 @@
    <hints>
     <hint type="sourcelabel">
      <x>507</x>
-     <y>402</y>
+     <y>501</y>
     </hint>
     <hint type="destinationlabel">
      <x>610</x>
      <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Droplet_formation</receiver>
+   <slot>s2value_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>483</x>
+     <y>459</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>437</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Droplet_formation</receiver>
+   <slot>svalue_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>468</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>385</y>
     </hint>
    </hints>
   </connection>
@@ -195,5 +253,6 @@
   <slot>slot3()</slot>
   <slot>slot4()</slot>
   <slot>slot5()</slot>
+  <slot>s2value_changed()</slot>
  </slots>
 </ui>

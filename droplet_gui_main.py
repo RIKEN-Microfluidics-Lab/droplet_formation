@@ -63,11 +63,15 @@ class MainWindow(QtWidgets.QMainWindow):
         ui.x=[]
         ui.y=[]
         ui.c=[]
+        ui.voltage1=0
+        ui.voltage2=0
+        
         ui.save=False
         ui.valve_1=False
         ui.valve_2=False
         ui.Filename="./"
         ui.value=0
+        
         
 #        # for function generator
 #        exposure=10
@@ -83,11 +87,24 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_figure(self):
             
         x,y,c=NI.ArduinoAI(ui.x,ui.y,ui.c)
+        
         c_1v = c[1]*0.004882
-        c_2v = c[2]*0.004882
+        c_2v = c[2]*0.0048822
         #print(c_1v,c_2v)
         c[1]=0.1208*c[1]-23.75
         c[2]=0.1208*c[2]-23.75
+        voltage = [0,0]
+        if ui.valve_1:
+            voltage[0]=ui.voltage1
+        else:
+            voltage[0]=0
+                
+        if ui.valve_2:
+            voltage[1]=ui.voltage2
+        else:
+            voltage[1]=0
+            
+        NI.ArduinoAO(True, voltage)
  
         if ui.save == True:
             
@@ -96,12 +113,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 # ui.count = 0で新規file open 
                 ui.Ti = np.append(ui.Ti,c[0]-x[1])
                 ui.CA1 = np.append(ui.CA1,c[1])
-                ui.CA2 = np.append(ui.CA2,c[2]*2)
-
-                ui.graphwidget.axes = ui.graphwidget.figure.add_subplot(121)          
+                ui.CA2 = np.append(ui.CA2,c[2])
+          
+                ui.graphwidget.figure.clear()
+                ui.graphwidget.axes = ui.graphwidget.figure.add_subplot(121)
                 ui.graphwidget.axes.clear()
                 ui.graphwidget.x  = ui.Ti
-                ui.graphwidget.y  = ui.CA1
+                ui.graphwidget.y  = ui.CA1          
                 ui.graphwidget.axes.plot(ui.graphwidget.x,ui.graphwidget.y)
                 ui.graphwidget.draw()
  
@@ -111,6 +129,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 ui.graphwidget.y  = ui.CA2
                 ui.graphwidget.axes.plot(ui.graphwidget.x,ui.graphwidget.y)
                 ui.graphwidget.draw()
+                
+                
 
                 file = open(ui.Filename, 'a')
 
@@ -139,7 +159,7 @@ class MainWindow(QtWidgets.QMainWindow):
             
         else:
             ui.count = 0 # add Hiroyuki
-            
+        
 
         # counter Display
         #NI.ArduinoAO(ui.valve)
@@ -164,8 +184,16 @@ class MainWindow(QtWidgets.QMainWindow):
         ui.valve_2 = not ui.valve_2
         NI.ArduinoDO_2(ui.valve_2)
         print('Valve2_pusshed.')
-       
+    
+    def s2value_changed(self):
+        #print('slider2_changed.')
+        ui.voltage1=ui.horizontalSlider.value()
+        ui.voltage2=ui.horizontalSlider_2.value()
         
+    def svalue_changed(self):
+        #print('slider1_changed.')
+        ui.voltage1=ui.horizontalSlider.value()
+        ui.voltage2=ui.horizontalSlider_2.value()
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     w = MainWindow()

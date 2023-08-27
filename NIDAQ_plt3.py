@@ -9,7 +9,7 @@ Update: 2020-11-05, kaneko
 
 import time, datetime, os, serial
 
-ser = serial.Serial('COM5', 9600, timeout=1)
+ser = serial.Serial('COM9', 9600, timeout=1)
 
 class AI():  
     def DefFile(): # Making Folder for saving outputs
@@ -36,7 +36,7 @@ class AI():
         c = []
 
         # Read analog input of AN4-5
-        ser.write(b'AI5:6')
+        ser.write(b'AI1:4')
         
         # Arduino will return the read value of analog input
         # format: AN1, AN2, ...
@@ -56,6 +56,7 @@ class AI():
             c.extend([0,0])
             
         for i in range(len(c)): # range(X):Xはチャンネル数
+            #print(c)
             c[i] = float(c[i]) # listをfloat形式に変換
  
         return(x,y,c)
@@ -85,13 +86,14 @@ class AI():
     def ArduinoAO(flag,values):
         #ser = serial.Serial('COM3',9600,timeout=1)
         #ser.flushInput()
-        print(values)
+        AO6out = 'AO6v' + str(values[0]*50) + '\n'
+        AO9out = 'AO9v' + str(values[1]*50) + '\n'
         if flag == True:
         #import serial
-            ser.write(b'AO6v200\n')
-            ser.write(b'AO9v400\n')
-            ser.write(b'AO10v600\n')
-            ser.write(b'AO11v800\n')
+            ser.write(AO6out.encode('utf-8'))
+            ser.write(AO9out.encode('utf-8'))
+            ser.write(b'AO10v5000\n')
+            ser.write(b'AO11v5000\n')
         else:
             ser.write(b'AO6v0\n')
             ser.write(b'AO9v0\n')
