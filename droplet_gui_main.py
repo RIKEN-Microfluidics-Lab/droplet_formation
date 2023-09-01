@@ -189,11 +189,13 @@ class MainWindow(QtWidgets.QMainWindow):
         #print('slider2_changed.')
         ui.voltage1=ui.horizontalSlider.value()
         ui.voltage2=ui.horizontalSlider_2.value()
+        ui.lcdNumber_2.display(ui.horizontalSlider_2.value())
         
     def svalue_changed(self):
         #print('slider1_changed.')
         ui.voltage1=ui.horizontalSlider.value()
         ui.voltage2=ui.horizontalSlider_2.value()
+        ui.lcdnumber_1.display(ui.horizontalSlider.value())
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     w = MainWindow()
