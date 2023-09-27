@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>796</width>
-    <height>669</height>
+    <width>1245</width>
+    <height>690</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -169,6 +169,76 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="value" stdset="0">
+     <double>0.000000000000000</double>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="valveButton_3">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>480</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Valve3</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="lcdNumber_3">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>400</y>
+      <width>64</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider_3">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>430</y>
+      <width>221</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="valveLcd_3">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>480</y>
+      <width>120</width>
+      <height>50</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>510</y>
+      <width>41</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>kPa</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -176,7 +246,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>796</width>
+     <width>1245</width>
      <height>21</height>
     </rect>
    </property>
@@ -265,6 +335,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>horizontalSlider_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Droplet_formation</receiver>
+   <slot>s3value_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>862</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1041</x>
+     <y>386</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>valveButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Droplet_formation</receiver>
+   <slot>slot4()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>804</x>
+     <y>522</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>942</x>
+     <y>606</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slot1()</slot>
@@ -274,5 +376,6 @@
   <slot>slot4()</slot>
   <slot>slot5()</slot>
   <slot>s2value_changed()</slot>
+  <slot>s3value_changed()</slot>
  </slots>
 </ui>

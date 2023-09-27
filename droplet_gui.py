@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'droplet_gui.ui'
+# Form implementation generated from reading ui file '.\droplet_gui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Droplet_formation(object):
     def setupUi(self, Droplet_formation):
         Droplet_formation.setObjectName("Droplet_formation")
-        Droplet_formation.resize(796, 669)
+        Droplet_formation.resize(1245, 690)
         self.centralwidget = QtWidgets.QWidget(Droplet_formation)
         self.centralwidget.setObjectName("centralwidget")
         self.recordButton = QtWidgets.QPushButton(self.centralwidget)
@@ -66,10 +66,31 @@ class Ui_Droplet_formation(object):
         self.lcdnumber_1.setObjectName("lcdnumber_1")
         self.lcdNumber_2 = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcdNumber_2.setGeometry(QtCore.QRect(430, 400, 64, 23))
+        self.lcdNumber_2.setProperty("value", 0.0)
+        self.lcdNumber_2.setProperty("intValue", 0)
         self.lcdNumber_2.setObjectName("lcdNumber_2")
+        self.valveButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.valveButton_3.setGeometry(QtCore.QRect(770, 480, 101, 51))
+        self.valveButton_3.setObjectName("valveButton_3")
+        self.lcdNumber_3 = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcdNumber_3.setGeometry(QtCore.QRect(770, 400, 64, 23))
+        self.lcdNumber_3.setObjectName("lcdNumber_3")
+        self.horizontalSlider_3 = QtWidgets.QSlider(self.centralwidget)
+        self.horizontalSlider_3.setGeometry(QtCore.QRect(770, 430, 221, 22))
+        self.horizontalSlider_3.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_3.setObjectName("horizontalSlider_3")
+        self.valveLcd_3 = QtWidgets.QLCDNumber(self.centralwidget)
+        self.valveLcd_3.setGeometry(QtCore.QRect(880, 480, 120, 50))
+        self.valveLcd_3.setObjectName("valveLcd_3")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(1010, 510, 41, 20))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
         Droplet_formation.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Droplet_formation)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 796, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1245, 21))
         self.menubar.setObjectName("menubar")
         Droplet_formation.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Droplet_formation)
@@ -82,6 +103,8 @@ class Ui_Droplet_formation(object):
         self.valveButton_2.clicked.connect(Droplet_formation.slot3) # type: ignore
         self.horizontalSlider_2.valueChanged['int'].connect(Droplet_formation.s2value_changed) # type: ignore
         self.horizontalSlider.valueChanged['int'].connect(Droplet_formation.svalue_changed) # type: ignore
+        self.horizontalSlider_3.valueChanged['int'].connect(Droplet_formation.s3value_changed) # type: ignore
+        self.valveButton_3.clicked.connect(Droplet_formation.slot4) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Droplet_formation)
 
     def retranslateUi(self, Droplet_formation):
@@ -92,3 +115,5 @@ class Ui_Droplet_formation(object):
         self.valveButton_2.setText(_translate("Droplet_formation", "Valve2"))
         self.label.setText(_translate("Droplet_formation", "kPa"))
         self.label_2.setText(_translate("Droplet_formation", "kPa"))
+        self.valveButton_3.setText(_translate("Droplet_formation", "Valve3"))
+        self.label_3.setText(_translate("Droplet_formation", "kPa"))

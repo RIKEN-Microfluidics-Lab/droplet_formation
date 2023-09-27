@@ -61,24 +61,34 @@ class AI():
  
         return(x,y,c)
     
-    # Control Valve_1    
-    def ArduinoDO_1(flag):
-        #ser.flushInput()
-        if flag==True:   
+    # Control Valve    
+    def ArduinoDO(channel,flag):
+        #ser.flushInput() 
+        if flag==True:
+            Dout = 'DO' + str(channel) + 'H\n'   
             ser.write(b'DO1H')
         else:
-            ser.write(b'DO1L')
+            Dout = 'DO' + str(channel) + 'L\n'
+        ser.write(Dout.encode('utf-8'))
         #ser.close()
 
     # Control Valve_2           
-    def ArduinoDO_2(flag):
-        #ser.flushInput()
-        if flag==True:   
-            ser.write(b'DO2H')
-        else:
-            ser.write(b'DO2L')
-        #ser.close()
-        
+    # def ArduinoDO_2(flag):
+    #     #ser.flushInput()
+    #     if flag==True:   
+    #         ser.write(b'DO2H')
+    #     else:
+    #         ser.write(b'DO2L')
+    #     #ser.close()
+    # # Control Valve_2           
+    # def ArduinoDO_3(flag):
+    #     #ser.flushInput()
+    #     print(flag)
+    #     if flag==True:   
+    #         ser.write(b'DO3H')
+    #     else:
+    #         ser.write(b'DO3L')
+            
     def ArduinoDP(ch,pulsewidth,duty,number):
         command = str.encode("DP:"+str(ch)+":"+str(int(pulsewidth))+":"+str(duty)+":"+str(number)+"\n")
         ser.write(command)
@@ -88,12 +98,14 @@ class AI():
         #ser.flushInput()
         AO6out = 'AO6v' + str(values[0]*50) + '\n'
         AO9out = 'AO9v' + str(values[1]*50) + '\n'
+        AO10out = 'AO10v' + str(values[2]*50) + '\n'
+        AO11out = 'AO11v' + str(values[3]*50) + '\n'
         if flag == True:
         #import serial
             ser.write(AO6out.encode('utf-8'))
             ser.write(AO9out.encode('utf-8'))
-            ser.write(b'AO10v5000\n')
-            ser.write(b'AO11v5000\n')
+            ser.write(AO10out.encode('utf-8'))
+            ser.write(AO11out.encode('utf-8'))
         else:
             ser.write(b'AO6v0\n')
             ser.write(b'AO9v0\n')
