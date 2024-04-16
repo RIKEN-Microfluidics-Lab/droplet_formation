@@ -66,11 +66,10 @@ class AI():
         #ser.flushInput() 
         if flag==True:
             Dout = 'DO' + str(channel) + 'H\n'   
-            ser.write(b'DO1H')
+            # ser.write(b'DO1H')
         else:
             Dout = 'DO' + str(channel) + 'L\n'
         ser.write(Dout.encode('utf-8'))
-        #ser.close()
 
     # Control Valve_2           
     # def ArduinoDO_2(flag):
